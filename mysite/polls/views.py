@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Question
 from django.template import loader
+from django.shortcuts import get_object_or_404
 from .models import Question
 # Create your views here.
 def index(request):
     latest_questions_list = Question.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('polls/templates/polls/index.html')
-    context = {'latest_question_list': latest_question_list,}
+    template = loader.get_template('polls/index.html')
+    context = {'latest_questions_list': latest_questions_list,}
     return HttpResponse(template.render(context, request))
 
 def detail(request, question_id):
